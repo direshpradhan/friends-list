@@ -1,0 +1,47 @@
+.title {
+  display: flex;
+  width: 35%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.title > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12pt;
+}
+
+.title > button:hover {
+  text-decoration: underline;
+}
+
+.friend_data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 35%;
+  margin: 1rem auto;
+  border: 1px solid darkgray;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.friend_data > div:first-of-type > p:first-of-type {
+  font-size: 14pt;
+  font-weight: 500;
+}
+
+.friend_data > div:first-of-type > p:last-of-type {
+  color: #6b7280;
+}
+
+.friend_data > div:last-of-type {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.friend_data > div:last-of-type span {
+  cursor: pointer;
+}

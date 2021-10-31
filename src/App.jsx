@@ -1,11 +1,11 @@
 import "./App.css";
-import { Input } from "./components/Input/Input";
+import { FriendsListing } from "./components/FriendsListing/FriendsListing";
 
 function App() {
   return (
     <div className="App">
-      <h2>Friends</h2>
-      <Input />
+      {/* <h2>Friends</h2> */}
+      <FriendsListing />
     </div>
   );
 }
