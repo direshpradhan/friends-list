@@ -1,0 +1,18 @@
+.input_text {
+  padding: 0.75rem;
+  margin: 0 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid gray;
+  width: 25%;
+  font-size: 12pt;
+}
+
+.btn {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background-color: #1f2937;
+  color: white;
+  font-size: 12pt;
+}
