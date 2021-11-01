@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main > p {
+  margin-right: 0.25rem;
+}
+
+.page_number {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid lightblue;
+  margin: 0 0.25rem;
+  cursor: pointer;
+  color: blue;
+}
+
+.page_number:hover {
+  text-decoration: underline;
+}
+
+.active {
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}

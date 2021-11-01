@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { FriendItem } from "../FriendItem/FriendItem";
 import { Input } from "../Input/Input";
+import { Pagination } from "../Pagination/Pagination";
 import styles from "./FriendsListing.module.css";
 
 export const FriendsListing = () => {
@@ -10,6 +12,9 @@ export const FriendsListing = () => {
   ];
   const [friendsData, setFriendsData] = useState(initialState);
   const [sort, setSort] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dataPerPage] = useState(4);
 
   const toggleFavourite = (id) => {
     const updatedData = friendsData.map((friend) => {
@@ -37,50 +42,57 @@ export const FriendsListing = () => {
 
   const sortedData = sortByFav(friendsData);
 
+  const search = (data) => {
+    const newData = data.filter((item) =>
+      item.name.toLowerCase().includes(searchText.toLowerCase().trim())
+    );
+    return newData;
+  };
+
+  const indexOfLastDataItem = currentPage * dataPerPage;
+  const indexOfFirstDataItem = indexOfLastDataItem - dataPerPage;
+  const currentData = sortedData.slice(
+    indexOfFirstDataItem,
+    indexOfLastDataItem
+  );
+
+  const searchData = search(currentData);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
       <Input setData={setFriendsData} />
-      <div className={`${styles.title}`}>
-        <h2>Friends List</h2>
-        <button onClick={() => setSort((sort) => !sort)}>
-          Sort By Favourites
-        </button>
+      <div className={`${styles.main}`}>
+        <div className={`${styles.title}`}>
+          <h2>Friends List</h2>
+          <button onClick={() => setSort((sort) => !sort)}>
+            Sort By Favourites
+          </button>
+        </div>
+        <input
+          type="search"
+          placeholder="Search Friends"
+          className={`${styles.searchbar}`}
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+        />
+        {searchData.map((friend) => {
+          return (
+            <FriendItem
+              friend={friend}
+              toggleFavourite={toggleFavourite}
+              removeFriend={removeFriend}
+            />
+          );
+        })}
+        <Pagination
+          dataPerPage={dataPerPage}
+          data={friendsData.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
       </div>
-      {/* <input type="search"  /> */}
-      {sortedData.map((friend) => {
-        return (
-          <div className={`${styles.friend_data}`} key={friend.id}>
-            <div>
-              <p>{friend.name} </p>
-              <p>is your friend</p>
-            </div>
-
-            <div>
-              {friend.favourite ? (
-                <span
-                  class="material-icons-outlined"
-                  onClick={() => toggleFavourite(friend.id)}
-                >
-                  star
-                </span>
-              ) : (
-                <span
-                  class="material-icons-outlined"
-                  onClick={() => toggleFavourite(friend.id)}
-                >
-                  star_border
-                </span>
-              )}
-              <span
-                class="material-icons-outlined"
-                onClick={() => removeFriend(friend.id)}
-              >
-                delete
-              </span>
-            </div>
-          </div>
-        );
-      })}
     </>
   );
 };
