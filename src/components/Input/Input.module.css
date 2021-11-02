@@ -22,3 +22,7 @@
   font-size: 12pt;
   width: 30%;
 }
+
+.error {
+  color: red;
+}
